@@ -139,4 +139,13 @@ public class UTCLoginTest {
 
         assertTrue(page.passwordValue().isEmpty());
     }
+    // TC07: Mat khau duoc che
+    @Test
+    void TC07_PasswordMasked() {
+        page.typePassword("123456");
+
+        assertEquals("password",
+                page.password()
+                        .getDomAttribute("type"));
+    }
 }
