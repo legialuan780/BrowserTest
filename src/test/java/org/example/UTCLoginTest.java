@@ -105,4 +105,11 @@ public class UTCLoginTest {
         page.login(USER, "InvalidPassword_ForTest");
         assertLoginRejected();
     }
+    // TC03: Sai ten dang nhap
+    @Test
+    void TC03_WrongUsername() {
+        requireErrorSelector();
+        page.login("invalid_test_user", "InvalidPassword_ForTest");
+        assertLoginRejected();
+    }
 }
