@@ -112,4 +112,15 @@ public class UTCLoginTest {
         page.login("invalid_test_user", "InvalidPassword_ForTest");
         assertLoginRejected();
     }
+    // TC04: Bo trong ca hai truong
+    @Test
+    void TC04_EmptyFields() {
+        page.typeUsername("");
+        page.typePassword("");
+
+        assertEquals("", page.usernameValue());
+        assertEquals("", page.passwordValue());
+
+        // Chua kiem tra thong bao validation cua server
+    }
 }
