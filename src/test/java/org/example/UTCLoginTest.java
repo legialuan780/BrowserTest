@@ -97,5 +97,12 @@ public class UTCLoginTest {
         page.login(USER, PASS);
         assertAuthenticated();
     }
-
+    // TC02: Sai mat khau
+    @Test
+    void TC02_WrongPassword() {
+        requireCredentials();
+        requireErrorSelector();
+        page.login(USER, "InvalidPassword_ForTest");
+        assertLoginRejected();
+    }
 }
