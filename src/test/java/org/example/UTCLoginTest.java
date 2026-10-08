@@ -197,5 +197,16 @@ public class UTCLoginTest {
         page.login("' OR '1'='1", "Test123");
         assertLoginRejected();
     }
+    // TC13: Nhan Enter
+    @Test
+    void TC13_PressEnter() {
+        requireErrorSelector();
+
+        page.typeUsername("invalid_test_user");
+        page.typePassword("InvalidPassword_ForTest");
+        page.password().sendKeys(Keys.ENTER);
+
+        assertLoginRejected();
+    }
 
 }
