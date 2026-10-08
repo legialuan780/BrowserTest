@@ -157,4 +157,17 @@ public class UTCLoginTest {
         page.setRemember(false);
         assertFalse(page.isRememberChecked());
     }
+    // TC09: Quen mat khau
+    @Test
+    void TC09_ForgotPassword() {
+        page.clickForgot();
+
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.urlContains(
+                        "/Login/GetPass"));
+
+        assertTrue(driver.getCurrentUrl()
+                .contains("/Login/GetPass"));
+    }
+
 }
