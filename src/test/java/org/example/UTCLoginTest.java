@@ -169,5 +169,17 @@ public class UTCLoginTest {
         assertTrue(driver.getCurrentUrl()
                 .contains("/Login/GetPass"));
     }
+    // TC10: Dang nhap email UTC
+    @Test
+    void TC10_EmailLogin() {
+        page.clickEmail();
+
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.urlContains(
+                        "accounts.google.com"));
+
+        assertTrue(driver.getCurrentUrl()
+                .startsWith("https://accounts.google.com/"));
+    }
 
 }
