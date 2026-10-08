@@ -181,5 +181,13 @@ public class UTCLoginTest {
         assertTrue(driver.getCurrentUrl()
                 .startsWith("https://accounts.google.com/"));
     }
+    // TC11: Username chi co khoang trang
+    @Test
+    void TC11_WhitespaceUsername() {
+        page.typeUsername("   ");
+
+        assertEquals("   ", page.usernameValue());
+    }
+
 
 }
