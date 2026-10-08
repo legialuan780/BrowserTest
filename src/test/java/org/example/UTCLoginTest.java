@@ -148,4 +148,13 @@ public class UTCLoginTest {
                 page.password()
                         .getDomAttribute("type"));
     }
+    // TC08: Checkbox ghi nho dang nhap
+    @Test
+    void TC08_RememberMe() {
+        page.setRemember(true);
+        assertTrue(page.isRememberChecked());
+
+        page.setRemember(false);
+        assertFalse(page.isRememberChecked());
+    }
 }
