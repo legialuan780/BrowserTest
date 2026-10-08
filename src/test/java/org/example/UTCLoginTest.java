@@ -188,6 +188,14 @@ public class UTCLoginTest {
 
         assertEquals("   ", page.usernameValue());
     }
+    // TC12: Ky tu dac biet giong SQL
+    @Test
+    void TC12_SpecialSQLInput() {
+        requireSecurityEnvironment();
+        requireErrorSelector();
 
+        page.login("' OR '1'='1", "Test123");
+        assertLoginRejected();
+    }
 
 }
