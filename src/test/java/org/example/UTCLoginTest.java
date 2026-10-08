@@ -123,4 +123,12 @@ public class UTCLoginTest {
 
         // Chua kiem tra thong bao validation cua server
     }
+    // TC05: Bo trong username
+    @Test
+    void TC05_EmptyUsername() {
+        page.typeUsername("");
+        page.typePassword("Test123");
+
+        assertTrue(page.usernameValue().isEmpty());
+    }
 }
