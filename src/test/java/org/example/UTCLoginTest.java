@@ -131,4 +131,12 @@ public class UTCLoginTest {
 
         assertTrue(page.usernameValue().isEmpty());
     }
+    // TC06: Bo trong password
+    @Test
+    void TC06_EmptyPassword() {
+        page.typeUsername("testuser");
+        page.typePassword("");
+
+        assertTrue(page.passwordValue().isEmpty());
+    }
 }
