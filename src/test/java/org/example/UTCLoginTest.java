@@ -1,6 +1,8 @@
 
 package org.example;
-
+import java.nio.file.Path;
+import java.nio.file.Files;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -149,14 +151,64 @@ public class UTCLoginTest {
                         .getDomAttribute("type"));
     }
     // TC08: Checkbox ghi nho dang nhap
+
     @Test
-    void TC08_RememberMe() {
+    void TC08_RememberMe() throws Exception {
+        requireCredentials();
+
+        // Tao profile Chrome rieng de luu du lieu
+        Path profile = Files.createTempDirectory("utc-remember-");
+
+        // Dong Chrome mac dinh
+        driver.quit();
+        driver = null;
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments(
+                "--user-data-dir=" + profile.toAbsolutePath()
+        );
+
+        driver = new ChromeDriver(options);
+        page = new LoginPage(driver);
+        page.open();
+
+        // Buoc 1: Nhap username va password
+        page.typeUsername(USER);
+        page.typePassword(PASS);
+
+        // Buoc 2: Tick Remember Me
         page.setRemember(true);
+
         assertTrue(page.isRememberChecked());
 
-        page.setRemember(false);
-        assertFalse(page.isRememberChecked());
+        // Buoc 3: Dong Chrome, KHONG dang nhap
+        driver.quit();
+        driver = null;
+
+        // Buoc 4: Mo lai Chrome cung profile
+        ChromeOptions reopenOptions = new ChromeOptions();
+        reopenOptions.addArguments(
+                "--user-data-dir=" + profile.toAbsolutePath()
+        );
+
+        driver = new ChromeDriver(reopenOptions);
+        page = new LoginPage(driver);
+        page.open();
+
+        // Buoc 5: Kiem tra username va password
+        assertEquals(
+                USER,
+                page.usernameValue(),
+                "Username khong duoc giu lai"
+        );
+
+        assertEquals(
+                PASS,
+                page.passwordValue(),
+                "Password khong duoc giu lai"
+        );
     }
+
     // TC09: Quen mat khau
     @Test
     void TC09_ForgotPassword() {
