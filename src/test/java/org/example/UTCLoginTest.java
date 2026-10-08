@@ -208,5 +208,12 @@ public class UTCLoginTest {
 
         assertLoginRejected();
     }
+    // TC14: Mat khau co khoang trang
+    @Test
+    void TC14_PasswordWithSpaces() {
+        page.typePassword("abc 123");
 
+        assertEquals("abc 123",
+                page.passwordValue());
+    }
 }
